@@ -15,7 +15,7 @@
 <div id = 'right_panel'>
     <div id = 'code_source'>
     </div>
-    <div id = 'source_control'>
+    <div id = 'source_control' style = 'clear: both'>
         <button class = 'source_button' onclick="run_code()">Run</button>
         <input type = checkbox id = 'step_mode'/>Step-by-step
         <input type = checkbox id = 'dump_mode'/>Dump variables
@@ -26,13 +26,15 @@
     <select size = "10" id ='watch_list'>
     </select>
     <div id = 'watch_control'>
-        <button class = 'watch_button' onclick="$('#watch_list > :selected').remove();">Delete</button>
         <button class = 'watch_button micromodal target-addwatch_dialog'>Add</button>
+        <button class = 'watch_button' onclick="$('#watch_list > :selected').remove();">Delete</button>
     </div>
     <textarea id = 'log' ></textarea>
 </div>
 
 <div style="visibility: hidden" class = 'micromodal target-input_dialog'></div>
+
+<div id = 'dialogs' style = 'clear: both'>
 
 <div id = "addwatch_dialog">
     Enter watch:
@@ -51,6 +53,8 @@
 	<div style = "text-align: right">
 		<button id = 'input_submit'>OK</button>
     </div>
+</div>
+
 </div>
 
 </body>

@@ -69,11 +69,11 @@
 #watch_control
 {
     padding-top: 10px;
+    clear: both;
 }
 
 .watch_button
 {
-    float: right;
 }
 
 #log
