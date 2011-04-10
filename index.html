@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Three address code interpreter</title>
+    <script src = 'scripts/jquery-1.5.2.js' type = 'text/javascript'></script>
+    <script src = 'scripts/jquery.micromodal-0.1.js' type = 'text/javascript'></script>
+    <script src = 'scripts/code_editor.js' type = 'text/javascript'></script>
+    <script src = 'scripts/interp_types.js' type = 'text/javascript'></script>
+    <script src = 'scripts/parser_tables.js' type = 'text/javascript'></script>
+    <script src = 'scripts/interp.js' type = 'text/javascript'></script>
+    <link rel = 'stylesheet' href = 'styles/code_editor.css'>
+</head>
+<body>
+<div id = 'right_panel'>
+    <div id = 'code_source'>
+    </div>
+    <div id = 'source_control'>
+        <button class = 'source_button' onclick="run_code()">Run</button>
+        <input type = checkbox id = 'step_mode'/>Step-by-step
+        <input type = checkbox id = 'dump_mode'/>Dump variables
+        <button class = 'source_button' disabled = disabled id = 'step_button' onclick = 'executeLine()'>Step</button>
+    </div>
+</div>
+<div id = 'left_panel'>
+    <select size = "10" id ='watch_list'>
+    </select>
+    <div id = 'watch_control'>
+        <button class = 'watch_button' onclick="$('#watch_list > :selected').remove();">Delete</button>
+        <button class = 'watch_button micromodal target-addwatch_dialog'>Add</button>
+    </div>
+    <textarea id = 'log' ></textarea>
+</div>
+
+<div style="visibility: hidden" class = 'micromodal target-input_dialog'></div>
+
+<div id = "addwatch_dialog">
+    Enter watch:
+	<input type = "text" id = "watch_name" class = 'modal-focus' />
+	<br /><br />
+	<div style = "text-align: right">
+        <button onclick="$.fn.microModal.dialogs['#addwatch_dialog'].close();">Cancel</button>
+		<button onclick="add_watch();$.fn.microModal.dialogs['#addwatch_dialog'].close();">OK</button>
+    </div>
+</div>
+
+<div id = "input_dialog">
+    Enter value for line <span id = 'input_linenubmer'></span>:
+	<input type = "text" id = "input_value" class = 'modal-focus' />
+	<br /><br />
+	<div style = "text-align: right">
+		<button id = 'input_submit'>OK</button>
+    </div>
+</div>
+
+</body>
+</html>

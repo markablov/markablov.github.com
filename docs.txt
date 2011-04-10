@@ -1,0 +1,92 @@
+Описываем грамматику:
+// строка исходника
+X = <line> = <vars_decl>|<command>
+X = C|D
+// описание одной переменной
+A = <var_decl> = <ident>|<ident><left_sq_bracket><number><right_sq_bracket>
+A = 0|0e1f
+// список переменных
+B = <var_list> = <var_decl>|<var_list><comma><whitespace><var_decl>
+B = A|Bk7A
+// команда обявления списка
+C = <vars_decl> = <var_keyword><whitespace><var_list>
+C = d7B
+// команда L: operation
+D = <command> = <ident><colon><whitespace><operation>|<operation>
+D = 0g7E|E
+// операция
+E = <operation> = <io>|<binary>|<control>|<assign>|<stack>
+E = F|O|Q|T|U
+// ввод/вывод in var, out var
+F = <io> = <in_keyword><whitespace><var_output_array>|<out_keyword><whitespace><var_input_array>
+F = b7H|c7M
+// куда можем записывать результат - [массив], переменная, разыменованный указатель
+G = <var_output> = <var_ptr>|<ident>
+G = K|0
+H = <var_output_array> = <var_output>|<var_ar>
+H = G|I
+// массив
+I = <var_ar> = <ident><left_sq_bracket><var_numb><right_sq_bracket>
+I = 0eJf
+J = <var_numb> = <ident>|<number>
+J = 0|1
+// разыменование
+K = <var_ptr> = <asterisk><ident>
+K = h0
+// указатель
+L = <var_ref> = <ref><ident>
+L = j0
+// откуда можем брать значения - [массив], переменная, разыменованный указатель, указатель на переменную, константа
+M = <var_input_array> = <var_input>|<var_ar>
+M = N|I
+N = <var_input> = <var_output>|<var_ref>|<number>
+N = G|L|1
+// массивы не доступны, ибо 3хоперандная грамматика
+O = <binary> = <var_output><assign_sign><var_input><operator><var_input>
+O = GiNPN
+P = <operator> = <plus>|<minus>|<asterisk>|<div>|<mod>
+P = 2|3|4|5|h
+// переходы
+Q = <control> = <goto>|<if>
+Q = R|W
+// безусловный
+R = <goto> = <goto_keyword><whitespace><ident>
+R = a70
+// условный
+W = <if> = <if_keyword><whitespace><var_input><comp_operator><var_input><whitespace><goto>
+W = l7N6N7R
+// присваивание
+T = <assign> = <var_output_array><assign_sign><var_input>|<var_output><assign_sign><var_input_array>
+T = HiN|GiM
+// работа со стеком
+U = <stack> = <pop_keyword><whitespace><var_output_array>|<push_keyword><whitespace><var_input_array>
+U = 87H|97M
+
+
+// ЛЕКСЕМЫ
+
+0 = <ident> = <letter>|<ident><letter>|<ident><digit>
+1 = <number> = <digit>|<number><digit>
+2 = <plus> = '+'
+3 = <minus> = '-'
+4 = <div> = '/'
+5 = <mod> = '%'
+6 = <comp_operator> = '<'|'>'|'>='|'<='|'=='|'!='
+7 = <whitespace> = ' '
+8 = <pop_keyword> = "pop"
+9 = <push_keyword> = "push"
+a = <goto_keyword> = "goto"
+b = <in_keyword> = "in"
+c = <out_keyword> = "out"
+d = <var_keyword> = "var"
+l = <if_keyword> = "if"
+e = <left_sq_bracket> = '['
+f = <right_sq_bracket> = ']'
+g = <colon> = ':'
+h = <asterisk> = '*'
+i = <assign_sign> = '='
+j = <ref> = '&'
+k = <comma> = ','
+$ = EOL
+<digit> = '0'..'9'
+<letter> = 'a'..'z'
